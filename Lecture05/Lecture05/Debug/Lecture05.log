@@ -1,0 +1,4 @@
+﻿  ex05_1.cpp
+c:\users\user\documents\hj921\lecture_c++\lecture05\lecture05\ex05_1.cpp(25): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+c:\users\user\documents\hj921\lecture_c++\lecture05\lecture05\ex05_1.cpp(26): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+  Lecture05.vcxproj -> C:\Users\user\Documents\hj921\lecture_C++\Lecture05\Debug\Lecture05.exe
