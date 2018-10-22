@@ -36,7 +36,7 @@ int main() {
 }
 ```
 
-
+* block -> ctrl + h (변환)
 
 ### Printf
 
@@ -220,3 +220,30 @@ EX) float의 저장 관련 설명 3.14
   - 정수 + 실수 = 실수
   - 실수 + 실수 = 실수
 
+
+
+### 입력 받기
+
+- scanf(+포인터(&) 필요)
+
+  ```c++
+  #include <stdio.h>
+  
+  int main() {
+  	int a, b;
+  
+  	scanf("%d%d", &a, &b); // &: 포인터
+  
+  	int sum = a + b;
+  	int diff = a - b;
+  	int prod = a * b;
+  	int quo = a / b;
+  
+  	printf("%d + %d = %d\n", a, b, sum);
+  	printf("%d - %d = %d\n", a, b, diff);
+  	printf("%d * %d = %d\n", a, b, prod);
+  	printf("%d / %d = %d\n", a, b, quo);
+  }
+  ```
+
+- scanf("%d%d, &a, &b") - 숫자가 space든 enter든 구분만 되어있다면 각가의 %d로 인식
