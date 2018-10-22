@@ -222,7 +222,7 @@ EX) float의 저장 관련 설명 3.14
 
 
 
-### 입력 받기
+### scanf
 
 - scanf(+포인터(&) 필요)
 
@@ -247,3 +247,43 @@ EX) float의 저장 관련 설명 3.14
   ```
 
 - scanf("%d%d, &a, &b") - 숫자가 space든 enter든 구분만 되어있다면 각가의 %d로 인식
+
+
+
+### char(character형)
+
+- char: 1바이트 정수형 (int: 4바이트)
+
+- character: 문자 - 반각문자(Halfwidths, ABC,abc1234_+\;/#%..) cf) 전각문자(Fullwidths, 한글, 일본어, 러시아어 등) x
+
+  ```c++
+  #include <stdio.h>
+  
+  int main() {
+      char a = 67;
+      
+      printf("%c\n", a);
+      printf("%d\n", a);
+      printf("%d\n", 'C'); // 'C' == 67
+  }
+  ```
+
+
+### ASCII
+
+- American Standard (문자 ~ 숫자)
+
+  ```c++
+  #include <stdio.h>
+  
+  int main() {
+      char a;
+      
+      scanf("%c\n", &a);
+      
+      printf("당신이 입력한 문자는 %c입니다.\n", a);
+  }
+  ```
+
+- R입력(scanf) -> ASCII코드 값 82를 변수 a에 담음. -> printf에서 a의 82 숫자 값을 가져와서 해당하는 문자 R을 반환.
+
