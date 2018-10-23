@@ -403,3 +403,57 @@ else {
 - 중첩 if문
 - 중괄호 코딩 스타일
 
+
+
+### switch
+
+- if와 유사
+
+```c++
+switch(choice) {
+    case 1:
+        printf("새 게임\n");
+        break;
+    case 2:
+        printf("불러오기\n");
+        break;
+    case 3:
+        printf("설정\n");
+        break;
+    case 4:
+        printf("크레딧\n");
+        break;
+    default:
+		printf("잘못 입력하셨습니다.");
+		break;
+}
+```
+
+- break : 중괄호 밖으려 나가게 됨. break가 없으면 case1에서 자동으로 case2로 넘어가는 문제가 발생.
+
+
+
+### goto
+
+- 남발하여 사용하지 않는 것 추천
+
+```c++
+#include <stdio.h>
+
+int main() {
+	int i = 1;
+	repeat:
+	printf("%d\n", i);
+	if (i < 10) {
+		i++;
+		goto repeat;
+	}
+}
+```
+
+
+
+### while
+
+- 반복문
+
