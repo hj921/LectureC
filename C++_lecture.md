@@ -287,3 +287,118 @@ EX) float의 저장 관련 설명 3.14
 
 - R입력(scanf) -> ASCII코드 값 82를 변수 a에 담음. -> printf에서 a의 82 숫자 값을 가져와서 해당하는 문자 R을 반환.
 
+### 산술연산자
+
+- 수학적인 연산
+
+- (+ - * / % =)
+
+  ```c++
+  #include <stdio.h>
+  int main() {
+      int a = 5;
+      a = a + 3; // 대입연산
+  }
+  ```
+
+- += -= *= /= %=
+
+  ```c++
+  #include <stdio.h>
+  int main() {
+      int a = 5;
+      
+      a += 6; // a = a + 6;
+      a %= 7; // a = a % 7;
+  }
+  ```
+
+- ++ --
+
+  - 전치 연산
+
+    ```c++
+    #include <stdio.h>
+    
+    int main() {
+        int a = 10;
+        int b;
+        // b = ++a;
+        a++; // a = 11, b = 11
+        b = a;
+    }
+    ```
+
+  - 후치 연산
+
+    ```c++
+    #include <stdio.h>
+    
+    int main() {
+        int a = 10;
+        int b;
+        // b = a++;
+        b = a; // a = 11, b = 10
+        a++;
+    }
+    ```
+
+
+
+### 비교 연산자
+
+- 참: 1, 거짓: 0
+
+```c++
+#include <stdio.h>
+
+int main() {
+    int a, b;
+    scanf("%d%d", &a, &b);
+    
+    int p = a > b;
+    int q = a < b;
+    int r = a == b; // == : 같다.
+}
+```
+
+
+
+### 논리 연산자
+
+- &&(AND), ||(OR), !(NOT)
+
+```c++
+#include <stdio.h>
+
+int main() {
+	int a;
+	scanf("%d", &a);
+
+	bool p = (a >= 1) && (a <= 10);
+	bool q = (a == 3) || a == 7;
+	bool r = !q;
+
+	printf("%d\n", p);
+	printf("%d\n", q);
+	printf("%d\n", r);
+}
+```
+
+
+
+### if
+
+- 경우를 나눌 때 사용.
+
+```c++
+if (n % 2 == 0) {
+    printf("n은 짝수\n");
+}
+else {
+    printf("n은 홀수\n");
+}
+```
+
+
+
