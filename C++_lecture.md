@@ -457,3 +457,36 @@ int main() {
 
 - 반복문
 
+```c++
+while (i <= 10) {
+    printf("%d\n", i);
+    i++;
+}
+```
+
+
+
+### do-while
+
+- 조건을 만족하든 안하든 무조건 첫 번째 한 번은 실행
+
+```c++
+do {
+    printf("%d\n", i);
+    i++;
+} while(i <= 10)
+```
+
+
+
+### 무한 반복
+
+```c++
+while(true) {
+    printf("%d ", i);
+    i++; // ctrl + c로 stop
+}
+```
+
+
+
