@@ -620,5 +620,130 @@ char *ptr_c;
 
 
 
+### 배열 - 포인터 관계
+
+```c++
+int a = 10;
+int *ptr_a = &a;
+
+printf("ptr_a의 값 : %d\n", ptr_a);
+printf("ptr_a + 1의 값 : %d\n", ptr_a + 1);
+```
+
+
+
+- 와 ptr_a + 1 -> 값 차이(=4)
+
+- 포인터에 값을 더하면 포인터가 가르키는 값의 형의 크기만큼 더해짐. int는 4바이트 이므로 4만큼.
+
+- 배열 선언하면 메모리상에서도 다닥다닥 붙어있는 형태로 할당된다.
+
+  ``` c++
+  #include <stdio.h>
+  
+  int main() {
+  	int arr[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+  	printf("arr의 값 : %d\n", arr); // arr == &arr[0]
+      printf("arr + 1의 값 : %d\n", arr + 1); //(arr + 1) == &arr[1]
+      // (arr + i) == &arr[i]
+  	for (int i = 0; i < 10; i++) {
+  		printf("&arr[%d] = %d\n", i, &arr[i]);
+  	}
+  }
+  ```
+
+
+
+
 ### 배열 포인터
+
+```c++
+/*
+	1. arr == &arr[0] ptr == &ptr[0]
+	2. *ptr == ptr[0]
+	3. ptr + 1 == ptr에 sizeof(*ptr)을 더한 값
+*/
+
+#include <stdio.h>
+
+int main() {
+	int arr[3] = { 1, 2, 3 };
+
+	printf("arr = %d\n", arr);
+	printf("arr + 1 = %d\n", arr + 1); // sizeof(arr)만큼 더해짐
+
+	printf("&arr = %d\n", &arr);
+	printf("&arr + 1 = %d\n", &arr + 1); // sizeof(arr)만큼 더해짐
+}
+```
+
+- 배열 첫 번째 칸을 대표로 가르킴
+- 해당 포인터 배열 + 1은 그 다음 배열을 가르킴. 즉 sizeof(arr)가 더해짐.
+
+```c++
+// 배열 포인터
+#include <stdio.h>
+
+int main() {
+	int arr[3] = { 1, 2, 3 };
+
+	int(*ptr_arr)[3]; //길이 3인 int형 배열을 가리키는 포인터를 선언
+	ptr_arr = &arr;
+    
+    for (int i = 0; i < 3; i++) {
+        printf("%d\n", (*ptr_arr)[i]);
+    }
+}
+```
+
+
+
+### 2차원 배열과 배열 포인터
+
+```c++
+#include <stdio.h>
+
+int main() {
+	int arr[2][3] = { {1, 2, 3}, {4, 5, 6} };
+
+	for (int(*row)[3] = arr; row < arr + 2; row++) {
+		for (int *col = *row; col < *row + 3; col++) {
+			printf("%d ", *col);
+		}
+		printf("\n");
+	}
+}
+```
+
+
+
+### 포인터 배열
+
+- 포인터들의 배열
+- cf) 배열 포인터 : 배열을 가리키는 포인터
+
+```c++
+int main() {
+	int*ptr[4]; // 포인터 배열 선언
+}
+```
+
+```c++
+#include <stdio.h>
+
+int main() {
+
+	int arr[4] = { 1, 2, 3, 4 };
+	int *ptr[4];
+
+	for (int i = 0; i < 4; i++) {
+		ptr[i] = &arr[i];
+	}
+
+	for (int i = 0; i < 4; i++) {
+		printf("%d ", *ptr[i]);
+	}
+	printf("\n");
+}
+```
 
