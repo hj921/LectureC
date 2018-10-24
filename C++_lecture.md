@@ -502,3 +502,123 @@ for (i = 1; i <= 10; i++) {
 ```
 
 - 블럭 내에서 정의된 변수는 블럭 밖에서 사용 불가.
+- break : 반복문 한 개를 빠져나옴
+- continue
+- 중첩  for 문
+
+```c++
+// 중첩 for 문
+
+#include <stdio.h>
+
+int main() {
+	int n;
+	scanf("%d", &n);
+
+	/*
+	
+		***
+		***
+		***
+		
+	*/
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) { // for (int j = 1; j <= i; j++) 계단 출력
+			printf("*");
+		}
+		printf("\n");
+	}
+}
+```
+
+
+
+### 배열
+
+```c++
+int a[5]; // 5개의 칸의 저장공간. 칸 하나하나가 변수처럼 사용 가능
+a[0] = 2;
+```
+
+```c++
+int arr[] = { 3, 1, 4, 1, 5, 9, 2, 6, 5, 3 };
+	for (int i = 0; i < sizeof(arr) / sizeof(int); i++) {
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+```
+
+- 2차원 배열
+
+```c++
+int arr[3][4]{
+    { 1, 2, 3, 4 }, 
+    { 5, 6, 7, 8 },
+    { 9, 10, 11, 12 }
+};
+
+for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 4; j++) {
+        printf("%d ", arr[i][j]);
+    }
+    printf("\n");
+}
+```
+
+- 파스칼의 삼각형
+
+```c++
+int main() {
+	int p[10][10];
+
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j <= i; j++) {
+			if (j == 0 || j == i) {
+				p[i][j] = 1;
+			}
+			else {
+				p[i][j] = p[i - 1][j - 1] + p[i - 1][j];
+			}
+			printf("%d ", p[i][j]);
+		}
+		printf("\n");
+	}
+}
+```
+
+
+
+### 문자열
+
+```c++
+char arr[100] = "Hello, world!";
+```
+
+- 문자열 끝에 항상 NULL 문자 존재. 그러므로 배열의 크기는 보이는 문자 수 + 1
+- <string.h>
+  - strlen
+  - strcpy(str2, str1) : str1의 문자열을 str2에 복사
+  - strcat
+  - strcmp(str1, str2) : 사전순서. str1이 사전순서상 앞이면 -1, 뒤이면 1, 동일 0
+
+
+
+### 포인터(pointer)
+
+- 변수를 가리키는 것.
+- 변수의 주소를 저장하는 변수
+
+```c++
+int a = 20;
+int *ptr_a; // 포인터 선언
+ptr_a = &a; // a의 주솟값 포인터 a에 저장
+
+char c;
+char *ptr_c;
+```
+
+
+
+### 배열 포인터
+
