@@ -1,0 +1,3 @@
+﻿  ex31_1.cpp
+c:\users\user\documents\hj921\lecture_c++\lecture31\lecture31\ex31_1.cpp(20): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+  Lecture31.vcxproj -> C:\Users\user\Documents\hj921\lecture_C++\Lecture31\Debug\Lecture31.exe
