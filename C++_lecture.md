@@ -747,3 +747,17 @@ int main() {
 }
 ```
 
+
+
+### 함수
+
+```c++
+#include <stdio.h>
+
+int main() {
+	printf("Hello, World\n");
+}
+```
+
+- int main() {} : main이라는 함수를 정의
+- printf("") : stdio.h에 있는 함수를 호출(사용)
