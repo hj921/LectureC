@@ -946,3 +946,36 @@ int main() {
 
 
 
+### typedef
+
+- 형을 정의
+
+```c++
+#include <stdio.h>
+
+int main() {
+    unsigned short int age; // -> usi age;
+    // unsigned short int : 자료형 중의 하나, 16비트(2바이트)짜리 부호가 없는 정수를 저장하는 자료형.
+}
+```
+
+- 기존에 있는 자료형을 다른 이름으로 다시 지어주는 것.(별명)
+
+```c++
+#include <stdio.h>
+
+int main() {
+	//int point[2] = { 3, 4 };
+	//printf("(%d, %d)\n", point[0], point[1]);
+	
+	typedef int Pair[2];
+	Pair point = { 3, 4 };
+
+	printf("(%d, %d)\n", point[0], point[1]);
+}
+```
+
+
+
+
+
