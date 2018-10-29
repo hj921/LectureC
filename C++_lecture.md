@@ -916,6 +916,8 @@ void drawSquare() {
 - recursion
 - 자기 자신의 정의 속에 다시 자기 자신이 포함된 것
 
+![1540823160449](C:\Users\user\AppData\Roaming\Typora\typora-user-images\1540823160449.png)
+
 
 
 ### 배열을 매개변수로 넘기기
