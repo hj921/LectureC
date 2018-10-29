@@ -761,3 +761,186 @@ int main() {
 
 - int main() {} : main이라는 함수를 정의
 - printf("") : stdio.h에 있는 함수를 호출(사용)
+
+```c++
+#include <stdio.h>
+
+// 전역변수
+int itemCnt = 0; 
+int money = 100;
+// int cost;
+
+void buyItem(int cost, int cnt) {
+	// itemCnt++
+    itemCnt += cnt;
+	money -= cost;
+	printf("아이템을 구매했습니다.\n");
+	printf(" 아이템 개수: %d\n", itemCnt);
+	printf(" 잔액 : %d\n", money);
+}
+
+int main() {
+	int a; // 지역변수
+    // cost = 30;
+	buyItem(30, 5);
+	// cost = 50;
+	buyItem(50, 7);
+}
+```
+
+- 지역변수 : 특정 함수 내에서 선언 된 변수(함수(블럭) 범위 내에서만 사용가능)
+- 매개변수 : 지역변수와 마찬가지로 함수 내에서만 사용이 가능. cost라는 변수를 main 함수에서 사용할 수는 없음.(ex. cost=30 x)
+- 매개변수가 두 개 이상 함수 가능
+- viod : 반환 값이 없음 의미.
+
+
+
+### return
+
+- 돌려주다, 반환
+
+```c++
+#include <stdio.h>
+
+int plus(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int sum = plus(3, 5);
+    printf("%d\n", sum);
+    
+    // return 0; return을 하지 않으면 자동으로 return 0 반환(main 함수의 경우)
+}
+```
+
+- plus(3, 5) : plus 함수 실행(a = 3, b = 5 매개변수에 대입).
+- 함수 실행 수 return 특정 값을 반환
+- plus(3, 5) 자체로 특정 값 대입. sum에 대입
+- printf로 출력
+- 한 함수 내에 return을 두 번 해도 문법적 오류는 발생하지 않음.(첫 번째 return만을 반환하고 함수를 종료. 함수는 return을 만나면 즉시 종료.)
+
+### call-by-value
+
+- 값에 의한 호출
+
+```c++
+#include <stdio.h>
+
+void swap(int x, int y) {
+	int tmp = x;
+	x = y;
+	y = tmp;
+}
+int main() {
+	int a, b;
+
+	scanf("%d%d", &a, &b);
+
+	swap(a, b);
+	printf("a = %d, b = %d\n", a, b);
+}
+```
+
+
+
+### call-by-reference
+
+- 참조에 의한 호출
+
+```c++
+#include <stdio.h>
+
+void swap(int *x, int *y) {
+	int tmp = *x;
+	*x = *y;
+	*y = tmp;
+}
+int main() {
+	int a, b;
+
+	scanf("%d%d", &a, &b);
+
+	swap(&a, &b);
+	printf("a = %d, b = %d\n", a, b);
+}
+```
+
+
+
+### prototype
+
+- 원형, 시제품
+- 함수가 어떻게 생겼는지만 간단하게 적어 놓는 것.
+- 함수의 원형을 미리 적고, 정의는 나중으로 미뤄두는 것.
+-  매개변수는 변수 type만 언급해줘도 가능.
+
+```c++
+// prototype : 원형, 시제품
+
+#include <stdio.h>
+
+// 함수 선언(함수 이름, 형, 매개변수만 적고 기능 구현은 안함)
+void walk(int distance);
+void rotate(int angle);
+void drawSquare();
+
+int main() {
+	drawSquare(); // 호출
+}
+
+// 함수 정의(함수 기능 구현)
+// 로봇의 기능
+// 1. 걷기
+void walk(int distance) {
+	printf("%dcm를 걸었습니다.\n", distance);
+}
+// 2. 돌기
+void rotate(int angle) {
+	printf("%d도 회전했습니다.\n", angle);
+}
+// 정사각형 그리며 돌기 (직진 -> 90도 우측 회전 -> 직진 -> 90도 -> 직진 -> 90도 -> 직진)
+void drawSquare() {
+	for (int i = 1; i <= 4; i++) {
+		walk(10);
+		rotate(90);
+	}
+}
+
+```
+
+
+
+### 재귀 함수
+
+- recursion
+- 자기 자신의 정의 속에 다시 자기 자신이 포함된 것
+
+
+
+### 배열을 매개변수로 넘기기
+
+```c++
+#include <stdio.h>
+
+// int arr[4] == int *arr
+
+void printArr(int arr[4]) { // call-by-reference
+	for (int i = 0; i < 4; i++) {
+		arr[i] *= 2; // arr[i] == *(arr+i)
+	}
+}
+int main() {
+	int arr[4] = { 1, 2, 3, 4 };
+	
+	printArr(arr); // arr == &arr[0]
+
+	for (int i = 0; i < 4; i++) {
+		printf("%d ", arr[i]);
+	}
+}
+
+```
+
+
+
