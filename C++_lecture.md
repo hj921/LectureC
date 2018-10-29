@@ -975,7 +975,109 @@ int main() {
 }
 ```
 
+### 구조체
+
+```c++
+typedef struct {int x, y;} Pair;
+
+Pair p; // int p[2];
+p.x = 3;
+p.y = 4;
+```
+
+- 여러 개의 변수를 하나로 묶은 것
+- 비교적 더 직관적
+- 구조체도 결국엔 자료형
+- 전역변수로 주로 선언
+- typedef struct {int x, y;} Point == struct Point {int x, y;};
+- typedef struct {int x, y;} Point; Point p == struct {int x, y;} p
 
 
 
+### 구조체와 메모리
+
+```c++
+#include <stdio.h>
+
+int main() {
+	struct Point {
+		int x, y; // 형 혼합되어도 상관 X
+		char c;
+		double d;
+	};
+
+	Point p;
+}
+```
+
+```c++
+#include <stdio.h>
+
+struct ProductInfo {
+	int num; // 4Byte
+	char name[100]; // 100B
+	int cost; // 4B
+};
+
+int main() {
+	ProductInfo myProduct = {479783, "제주 한라봉", 19900}; // 초기화
+    // 구조체 변수 초기화 시 등호 없이 작성 가능
+    // ProductInfo myProduct{479783, "제주 한라봉", 19900}; 
+
+	/*
+	printf("상품 번호 : %d\n", myProduct.num);
+	printf("상품 이름 : %s\n", myProduct.name);
+	printf("가     격 : %d\n", myProduct.cost);
+
+	printf("sizeof(myProduct = %d\n", sizeof(myProduct));
+	*/
+	printf("상품 번호 : %d\n", &myProduct.num);
+	printf("상품 이름 : %d\n", myProduct.name);
+	printf("가     격 : %d\n", &myProduct.cost);
+    
+    printf("%d\n", &myProduct); // == &myproduct.num
+}
+```
+
+![1540834388630](C:\Users\user\AppData\Roaming\Typora\typora-user-images\1540834388630.png)
+
+
+
+### 구조체 포인터
+
+```c++
+#include <stdio.h>
+
+struct ProductInfo {
+	int num; // 4Byte
+	char name[100]; // 100B
+	int cost; // 4B
+};
+
+/*
+void productSale(ProductInfo p, int percent) { // call-by-value
+	p.cost -= p.cost*percent / 100;
+}
+*/
+
+// call-by-reference
+void productSale(ProductInfo *p, int percent) {
+	p->cost -= p->cost*percent / 100;
+}
+int main() {
+	ProductInfo myProduct{ 479783, "제주 한라봉", 20000 };
+
+	ProductInfo *ptr_product = &myProduct;
+
+	productSale(&myProduct, 10);
+	
+	// (*a).b == a->b
+	printf("상품 번호 : %d\n", ptr_product->num); // (*ptr_product).num
+	printf("상품 이름 : %s\n", ptr_product->name);
+	printf("가     격 : %d\n", ptr_product->cost);
+
+	//printf("sizeof(myProduct = %d\n", sizeof(myProduct));
+	
+}
+```
 
