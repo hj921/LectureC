@@ -1,0 +1,5 @@
+﻿  ex40_1.cpp
+c:\users\user\documents\hj921\lecture_c++\lecture40\lecture40\ex40_1.cpp(19): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int *'입니다.
+c:\users\user\documents\hj921\lecture_c++\lecture40\lecture40\ex40_1.cpp(20): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'char *'입니다.
+c:\users\user\documents\hj921\lecture_c++\lecture40\lecture40\ex40_1.cpp(21): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int *'입니다.
+  Lecture40.vcxproj -> C:\Users\user\Documents\hj921\lecture_C++\Lecture40\Debug\Lecture40.exe
