@@ -1081,3 +1081,49 @@ int main() {
 }
 ```
 
+
+
+### 구조체에 함수 집어넣기
+
+```c++
+#include <stdio.h>
+
+struct Time {
+	int h, m, s;
+
+	int totalSec() {
+		return 3600 * h + 60 * m + s;
+	}
+};
+
+int main() {
+	Time t = { 1, 22, 48 };
+
+	printf("%d\n", t.totalSec());
+}
+```
+
+- 구조체와 밀접한 관련을 한 함수는 구조체에서 선언해주는 편이 좋음
+
+```c++
+#include <stdio.h>
+
+struct Point {
+    int x, y;
+    
+    void moveRight() {x++;}
+    void moveLeft() {x--;}
+    void moveUp() {y++;}
+    void moveDown() {y--;}
+};
+
+int main() {
+    Point p = {2, 5};
+    
+    p.moveDown();
+    p.moveRight();
+    
+    printf("(%d, %d)\n", p.x, p.y);
+}
+```
+
