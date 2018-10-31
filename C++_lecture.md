@@ -1127,3 +1127,80 @@ int main() {
 }
 ```
 
+
+
+### 상수
+
+- 변하지 않는 수 <-> 변수(변할 수 있는 수)
+- const, 매크로, enum
+
+```c++
+#include <stdio.h>
+
+// 매크로
+#define PI 3.14159 // 별명(PI)
+// 3.14159fh 정의 됨 -> 주솟값을 가져올 수 없음.(주소값 존재 x)
+// 값 변경도 불가
+
+int main() {
+	float a = PI;
+
+	printf("π = %.2f\n", PI);
+	//printf("&PI = %df\n", &PI);
+}
+```
+
+```c++
+// enum
+
+#include <stdio.h>
+
+enum EGameState {
+	GAMESTATE_MAINMENU,
+	GAMESTATE_PLAYING,
+	GAMESTATE_PAUSED ,
+	GAMESTATE_GAMEOVER
+};
+
+int main() {
+	int currState = GAMESTATE_MAINMENU;
+	// EGameState currState;
+
+	while (true) {
+		switch (currState) {
+		case GAMESTATE_MAINMENU:
+			break;
+		case GAMESTATE_PLAYING:
+			break;
+		case GAMESTATE_PAUSED:
+			break;
+		case GAMESTATE_GAMEOVER:
+			break;
+		}
+	}
+}
+```
+
+
+
+### 매크로
+
+- 매크로 사용 시 후에 문제 발생을 줄이기 위해 가능한 구문 전체와 각 변수별 괄호를 싸주는 것이 좋음.
+
+```c++
+#include <stdio.h>
+
+#define FOR(I, S, E) for (int I = S; I <= E; I++)
+#define LOOP while(true)
+
+int main() {
+	FOR(i, 1, 10) { // for (int i = 1;  i <= 10; i++)
+		printf("%d ", i);
+	}
+
+	LOOP{
+		printf("*");
+	}
+}
+```
+

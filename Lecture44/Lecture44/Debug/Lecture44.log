@@ -1,0 +1,3 @@
+﻿  ex44_2.cpp
+c:\users\user\documents\hj921\lecture_c++\lecture44\lecture44\ex44_2.cpp(6): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+  Lecture44.vcxproj -> C:\Users\user\Documents\hj921\lecture_C++\Lecture44\Debug\Lecture44.exe
