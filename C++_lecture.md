@@ -1204,3 +1204,199 @@ int main() {
 }
 ```
 
+
+
+### 비트 연산
+
+- 22 = 10110(2) -> char형 변수에 -> 00010110(8) -> 비트 하나 하나를 비교하며 연산
+- 비트 논리 연산 : &(AND), |(OR), ^(XOR), ~(NOT)      cf.논리 연산 && || !
+
+```c++
+// 논리 연산 && || !
+// 비트 논리 연산 & | ^  ~
+
+#include <stdio.h>
+
+int main() {
+	char a = 12, b = 10; 
+	// 12 = 1100(2), 10 = 1010(2)
+	// 12 = 00001100(8), 10 = 00001010(8)
+
+	// 8
+	// 각 비트 AND 연산
+	// 00001000 = 8(10)
+	printf("%d\n", a & b); 
+
+	// 14
+	// 각 비트 OR 연산
+	// 00001110 = 14(10)
+	printf("%d\n", a | b); 
+
+	// 6
+	// 각 비트 XOR 연산
+	// 00000110 = 6(10)
+	printf("%d\n", a ^ b); 
+
+	// -13
+	// 각 비트 NOT 연산
+	// 11110011 = -13(10) 맨 앞 부호 비트.
+	printf("%d\n", ~a);
+}
+```
+
+- 시프트(shift) 연산 : <<, >>
+  - 시프트(shift) : 옮기다
+  - 00010110 -> shift(왼방향) -> 00101100 (빈 공간 생기는 뒤는 0으로 채워지고 앞은 날리고)
+
+
+
+### 파일 입출력
+
+- C언어 main함수가 끝나면 자동으로 file을 닫음.
+- 하지만 file 열 수 있는 개수 한계 존재 ->  파일 열고닫아가면서 적은 갯수의 파일을 열어 놓는 편이 좋음.
+- fopen("파일명", "r,w,a") : r(read), w(write) 파일 안의 내용 다 지우고 파일에 씀, a(기존에 있는 내용 뒤에 이어씀)
+- fopen에서 파일명 오타 -> runtime error
+
+```c++
+#include <stdio.h>
+
+int main() {
+	FILE *in, *out; // 스트림, 파일을 가리키는 포인터(간단히 설명하면)
+	int n;
+
+	in = fopen("input.txt", "r"); // r(read), w(write)
+	out = fopen("output.txt", "w");
+    
+    printf("in = %d\n", in);
+
+	fscanf(in, "%d", &n);
+	fprintf(out, "%d\n", n);
+    
+    fclose(in);
+    fclose(out);
+}
+```
+
+```c++
+#include <stdio.h>
+// 자기 자신(코드) 출력
+int main() {
+	FILE *in = fopen("ex47_3.cpp", "r");
+	char ch;
+	while (!feof(in)) {
+		fscanf(in, "%c", &ch);
+		printf("%c", ch);
+	}
+
+	fclose(in);
+}
+```
+
+- feof(in) : 파일을 끝까지 읽었을 때, TRUE 아닐 경우 FALSE. eof(end of file)
+
+- 결과 -> 끝에 중괄호 하나 더 존재. while 문을 잘 생각해볼 것.
+
+  ![1541039451317](C:\Users\user\AppData\Roaming\Typora\typora-user-images\1541039451317.png)
+
+- 마지막 중괄호가 하나로 똑같이 print 되게 할 경우(권장 코드)
+
+```c++
+	while (fscanf(in, "%c", &ch) != EOF) {
+		printf("%c", ch);
+	}
+```
+
+
+
+### 유용한 함수들
+
+- getchar(문자를 입력 받는다.) / putchar(문자를 내보낸다.) <- scanf ~ printf보다 빠름.
+- getchar() : 매개변수가 필요 없음
+
+```c++
+ch = getchar();
+putchar(ch);
+```
+
+- gets / puts -> gets_s
+- scanf("%s", ...) : 한 줄 단위가 아닌 공백을 기준으로 받아진다.
+- scanf("%s", str);에서 Hello, World!가 입력되면 Hello, 가 출력
+
+```c++
+#include <stdio.h>
+int main() {
+	char str[100];
+
+	gets_s(str); // call by reference
+	puts(str);
+}
+```
+
+- sscanf / sprintf : 문자열로 부터 입출력 받아서 내보냄.
+
+```c++
+int main() {
+	char str[] = "450";
+	int n;
+
+	sscanf(str, "%d", &n);
+	printf("n의 값 : %d\n", n);
+}
+
+int main() {
+    int n = 450;
+    char str[100];
+    
+    sprintf(str, "%d", n);
+    printf("%s\n", str)
+}
+```
+
+- 난수 -> stdlib.h
+
+```c++
+#include <stdlib.h> // standard library
+#include <stdio.h>
+#include <time.h>
+
+int main() {
+    // seed, 현재 시각을 주로 seed로 많이 씀. 
+    srand(time(NULL));
+    // time(NULL); // 1970/01/01 00:00:00로부터 지난 시간, 초 단위
+    // printf("%d\n", time(NULL));
+	for (int i = 1; i <= 10; i++) {
+		printf("%d\n", rand() % 10 + 1); // 1부터 10까지의 random number
+	}
+}
+```
+
+- exit(0) : 그 자리에서 바로 프로그램 종료
+
+```c++
+// exit(0);
+
+#include <stdio.h>
+#include <stdlib.h>
+// 다섯 개의 자연수를 받아서 합을 구하는 함수. 
+// 다른 형일 경우 잘못입력하였습니다 ~ 프로그램 종료
+
+int main() {
+	int sum = 0;
+
+	for (int i = 0; i < 5; i++) {
+		int n;
+
+		scanf("%d", &n);
+
+		if (n <= 0) {
+			printf("INPUT ERROR\n");
+			exit(0);
+		}
+		
+		sum += n;
+	}
+
+	printf("%d\n", sum);
+}
+```
+
