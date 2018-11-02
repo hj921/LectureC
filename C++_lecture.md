@@ -1,3 +1,5 @@
+arr[]
+
 ### Hello, World
 
 ~~~c++
@@ -1400,3 +1402,151 @@ int main() {
 }
 ```
 
+
+
+
+
+### C++ 스타일 입출력
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    cout << "Hello, World!" << endl;
+}
+```
+
+```c++
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, World!" << std::endl;
+}
+```
+
+- <<(shift)연산자 : 출력할 데이터를 분리해주는 용도로 쓰는 연산자
+- endl : end line(줄바꿈) '\n'으로 대체도 가능함
+- cout : 출력
+- std : name space, 이름에서 성과 유사한 역할
+- 같은 n이라는 이름을 쓰지만 서로 다른 namespace를 가지므로 다른 것으로
+
+```c++
+namespace a
+{
+    int n;
+}
+namespace b
+{
+    int n;
+}
+
+int main() {
+    a::n = 10;
+    b::n = 20;
+}
+```
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	int a, b;
+	cin >> a >> b;
+
+	cout << a << " + " << b << " = " << a + b << endl;
+}
+```
+
+```c++
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+	string name;
+
+	cout << "이름 입력 : ";
+	cin >> name;
+
+	string message = "안녕하세요, " + name + " 님.";
+	cout << message << endl;
+	/*
+	string str;
+	str = "Hello";
+	cout << str << endl;
+	*/
+}
+```
+
+
+
+### C++ 스타일 기본 문법
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int a(10); // 변수 초기화(C++ 스타일)
+}
+```
+
+```c
+int a = 10; // C언어 스타일 변수 초기화
+```
+
+```c
+// 1
+int a = 10;
+// 2
+int a;
+a = 10;
+// 1번 방식과 2번 방식에는 약간의 차이가 존재.(언급만)
+```
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	int a(5);
+	int &r1 = a;
+	int &r2 = 3; // 상수 3이 저장된 변수가 아닌 상수 자체를 포인터가 가리킬 수 없음
+	int &r3 = a * a; // 식 자체는 메모리에 저장된 것이 아니므로 포인터로 가리킬 수 없음
+    int &&r2 = 3;
+    int &&r3 = a * a;
+}
+```
+
+- r-value : 수정 할 수 있는 값 ex. 변수(int a;) int &a 표현
+- l-value : 수정 할 수 없는 값 ex. 상수, a * a(공식 형태) int &&a
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    arr[10] = {4, 5, 8, 9, 2, 4, 72, 4, 3, 7};
+    
+    for (n : arr) {
+        cout << n << ' ';
+        n++; // 출력 값에 변화 없음
+    }
+    
+    for (&n : arr) {
+        cout << n << ' ';
+        n++; // 출력 값에 변화 있음
+    }
+}
+```
+
+- 첫 번째 for문: n을 변경한다고 해서 메모리상의 arr 자체의 값이 변경 되는 것이 아니므로 값 변화 없음
+- 두 번째 for문: call-by-reference
