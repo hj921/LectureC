@@ -1,5 +1,3 @@
-arr[]
-
 ### Hello, World
 
 ~~~c++
@@ -1550,3 +1548,96 @@ int main() {
 
 - 첫 번째 for문: n을 변경한다고 해서 메모리상의 arr 자체의 값이 변경 되는 것이 아니므로 값 변화 없음
 - 두 번째 for문: call-by-reference
+
+
+
+### namespace
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int n;
+void set() {
+	::n = 10; // 명시적 전역 변수
+}
+
+namespace doodle {
+	int n;
+	void set()
+}
+
+namespace google {
+	int n;
+	void set()
+}
+
+int main() {
+	::set();
+	doodle::set();
+	google::set();
+	cout << ::n << endl; // 10
+	cout << doodle::n << endl; // 20
+	cout << google::n << endl; // 30
+}
+
+namespace doodle {
+    void set() {
+        n = 20;
+    }
+}
+
+void google::set() {
+    n = 30;
+}
+```
+
+- namespace 안의 함수도 기본 뼈대만 선언 후 밑에 정의 및 구체적 내용을 정의하는 방법 가능
+- 식별자 검색
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int n;
+void set() {
+	n = 10;
+}
+
+namespace doodle {
+	void set();
+
+	namespace google {
+		void set();
+		int n;
+	}
+	int n;
+}
+
+int main() {
+	::set();
+	doodle::set();
+	doodle::google::set();
+
+	cout << ::n << endl;
+	cout << doodle::n << endl;
+	cout << doodle::google::n << endl;
+	// 10 20 30
+	// 식별자 검색
+}
+
+void doodle::set() {
+	n = 20;
+}
+
+void doodle::google::set() {
+	n = 30;
+}
+```
+
+- 전역의 함수 혹은 변수와 특정 namespace안의 함수 혹은 변수의 명이 같은 경우에는 using namespace를 사용하더라도 어느 함수, 변수인지 모호하므로 소속을 생략할 수 없음
+
+### 클래스
+
