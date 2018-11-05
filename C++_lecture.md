@@ -1641,3 +1641,13 @@ void doodle::google::set() {
 
 ### 클래스
 
+- struct : C언어의 struct와 C++의 struct는 완전히 다름
+- 클래스 = 자료저장 + 자료처리(가장 기본이 되는 기능) -> 변수 + 함수
+- 클래스(타입): 특정한 용도를 수행하기 위한 변수와 함수를 모아 둔 틀
+- 객체(오브젝트): 그 틀을 이용하여 찍어낸 개체(변수, 메모리 상의 공간)
+- 접근제어지시자
+  - public
+  - private
+  - protected
+- 내부적인 속성들은 보호를 하며 외부 사용자들이 속성들에 접근 할 수 있는 인터페이스를 제공하는 것 -> 캡슐화
+- struct -> default public / class -> defalut private
