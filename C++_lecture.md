@@ -1651,3 +1651,156 @@ void doodle::google::set() {
   - protected
 - 내부적인 속성들은 보호를 하며 외부 사용자들이 속성들에 접근 할 수 있는 인터페이스를 제공하는 것 -> 캡슐화
 - struct -> default public / class -> defalut private
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+//struct TV {
+//private:
+class TV {
+	bool powerOn;
+	int channel;
+	int volume;
+
+public:
+	void on() {
+		powerOn = true;
+		cout << "TV를 켰습니다." << endl;
+	}
+
+	void off() {
+		powerOn = false;
+		cout << "TV를 껐습니다." << endl;
+	}
+
+	void setChannel(int cnl) {
+		if (cnl >= 1 && cnl <= 999) {
+			channel = cnl;
+			cout << "채널을 " << cnl << "(으)로 바꿨습니다." << endl;
+		}
+	}
+	void setVolume(int vol) {
+		if (vol >= 0 && vol <= 100) {
+			volume = vol;
+			cout << "채널을 " << vol << "(으)로 바꿨습니다." << endl;
+		}
+	}
+};
+
+int main() {
+	TV lg;
+	/* private으로 접근 불가
+	lg.powerOn = true;
+	lg.channel = 10;
+	lg.setVolume = 400;
+	*/
+	lg.on();
+	lg.setChannel(10);
+	lg.setVolume(50);
+	lg.setVolume(-73); // 볼륨 변화 없음
+}
+```
+
+
+
+
+
+### this 포인터
+
+- this : 자기 객체 자신을 가리키는 포인터
+- 보이지 않지만 'this'라는 매개변수를 받아 놓는다. -> 보이지 않는 매개변수
+
+```c++
+class MyClass {
+public:
+	void PrintThis() {
+		cout << "나의 주소는 " << this << endl;
+	}
+};
+
+int main() {
+	MyClass a, b;
+
+	cout << "a의 주소는 " << &a << endl;
+	cout << "b의 주소는 " << &b << endl;
+
+	a.PrintThis();
+	b.PrintThis();
+}
+```
+
+
+
+### 객체의 생성과 소멸
+
+- 생성자: 객체가 생성될 때 자동으로 호출되는 함수
+- 소멸자: 객체가 소멸될 때 자동으로 호출되는 함수
+- 생성자: 멤버 변수 초기화
+- 소멸자: 메모리 해제
+- LocalObj 지역 함수를 만나는 순간 생성. 지역 함수가 끝나는 순간 소멸자 호츨
+- default 생성자, default 소멸자
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+class MyClass {
+public:
+	MyClass() { // 생성자
+		cout << "생성자가 호출되었다!!" << endl;
+	}
+
+	~MyClass() // 소멸자
+	{
+		cout << "소멸자가 호출되었다!!" << endl;
+	}
+};
+
+//MyClass globalObj;
+
+void testLocalObj() {
+	cout << "testLocalObj함수 시작!!" << endl;
+	MyClass localObj;
+	cout << "testLocalObj함수 끝!!" << endl;
+} 
+int main() {
+	cout << "main함수 시작!!" << endl;
+	testLocalObj();
+	cout << "main함수 끝!!" << endl;
+}
+```
+
+- 변수 초기화 목록
+
+```c++
+Complex() : real(0), imag(0) {	} // 변수 초기화 목록
+Complex(double real_, double imag_) : real(real_), imag(imag_) {	} 
+// _를 이용하여 매개변수와 멤버변수 구분 초기화 목록에서는 굳이 사용하지 않아도 문제 없음
+Complex(double real, double imag) : real(real), imag(imag) {    }
+```
+
+- 생성자 위임
+
+```c++
+class Time {
+public:
+	Time() : h(0), m(0), s(0) {	}
+	Time(int s_) : Time() {
+		s = s_;
+	}
+	Time(int m_, int s_) : Time(s_) {
+		m = m_;
+	}
+	Time(int h_, int m_, int s_) : Time(m_, s_) { // 생성자 위임
+		h = h_;
+	}
+private:
+	int h;
+	int m;
+	int s;
+};
+```
+
