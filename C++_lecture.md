@@ -1804,3 +1804,112 @@ private:
 };
 ```
 
+ 
+
+### 정적 멤버
+
+- static : 정적 <-> 동적
+- class 내에서 private 접근 가능
+- 전역 함수 -> class와 밀접한 관련 존재, private에 접근 하고 싶은 경우
+- 정적 멤버 메서드
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+// 0~1사이의 값 float RGB(A)
+class Color {
+public:
+	Color() : r(0), g(0), b(0) {	} // black
+	Color(float r, float g, float b) : r(r), g(g), b(b) {	}
+
+	float GetR() { return r; }
+	float GetG() { return g; }
+	float GetB() { return b; }
+
+	static Color MixColors(Color a, Color b) {
+		//return Color((a.GetR() + b.GetR()) / 2, (a.GetG(), b.GetG()) / 2, (a.GetB() + b.GetB()) / 2);
+		return Color((a.r + b.r) / 2, (a.g, b.g) / 2, (a.b + b.b) / 2);
+	}
+
+private:
+	float r;
+	float g;
+	float b;
+};
+
+
+
+int main() {
+	Color blue(0, 0, 1);
+	Color red(1, 0, 0);
+
+	Color purple = Color::MixColors(blue, red);
+	//Color purple = blue.MixColors(blue, red);
+
+	cout << "r = " << purple.GetR() << ", g = " << purple.GetG() << ", b = " << purple.GetB();
+}
+```
+
+- 정적 멤버 변수
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int idCounter = 1;
+
+class Color {
+public:
+
+	Color() : r(0), g(0), b(0), id(idCounter++) {
+		/*
+		id = idCounter;
+		idCounter++;
+		*/
+	}
+	Color(float r, float g, float b) : r(r), g(g), b(b), id(idCounter++) {	}
+
+	float GetR() { return r; }
+	float GetG() { return g; }
+	float GetB() { return b; }
+
+	int GetId() { return id; }
+
+	static Color MixColors(Color a, Color b) {
+		return Color((a.r + b.r) / 2, (a.g + b.g) / 2, (a.b + b.b) / 2);
+	}
+
+	// static int idCounter = 1; // 정적으로 선언 된 것은 클래스 안에서 초기값을 줄 수 없음.
+	static int idCounter;
+
+private:
+	float r;
+	float g;
+	float b;
+
+	int id;
+};
+
+int Color::idCounter = 1; // 선언과 정의 분리 형태
+
+int main() {
+	Color blue(0, 0, 1);
+	Color red(1, 0, 0);
+
+	Color purple = Color::MixColors(blue, red);
+
+	cout << "r = " << purple.GetR() << ", g = " << purple.GetG() << ", b = " << purple.GetB() << endl;
+
+	cout << "red.GetId() = " << red.GetId() << endl;
+	cout << "blue.GetId() = " << blue.GetId() << endl;
+	cout << "purple.GetId() = " << purple.GetId() << endl;
+}
+```
+
+- 클래스와 관련있는 함수나 변수는 클래스안으로 넣는 것이 좋음(전역 변수, 전역 함수 남용은 좋지 않음.)
+
+
+
