@@ -1911,5 +1911,47 @@ int main() {
 
 - 클래스와 관련있는 함수나 변수는 클래스안으로 넣는 것이 좋음(전역 변수, 전역 함수 남용은 좋지 않음.)
 
+### 상수형 매개변수와 상수형 메서드
 
+- 매개변수의 상수화 (모든 함수에 대해서)
+- 메서드의 상수화 (멤버 메서드에서만) : 어떤 메서드에 대해서 메서드 내에서 속한 클래스에 다른 멤버변수를 건들 수 없도록 만드는 것.
+  - 멤버변수 읽기는 가능하지만 쓰기는 불가능
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+class Account {
+public:
+	Account() : money(0) {		}
+	Account(int money) : money(money) {	}
+	
+	void Deposit(const int d) {
+		// d = money; // 버그 생성
+		money += d;
+		cout << d << "원을 예금했다!!" << endl;
+	}
+	void Draw(const int d) {
+		if (money >= d) {
+			money -= d;
+			cout << d << "원을 인출했다!!" << endl;
+		}
+	}
+
+	int ViewMoney() const {
+		// money++; // 실수(버그) 생성, 이러한 실수 방지 -> 메서드 상수화
+		return money;
+	}
+private:
+	int money;
+};
+
+int main() {
+	Account doodle(100);
+	doodle.Deposit(100);
+	doodle.Draw(20);
+	cout << doodle.ViewMoney() << endl;
+}
+```
 
